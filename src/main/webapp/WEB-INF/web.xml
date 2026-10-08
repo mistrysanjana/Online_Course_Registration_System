@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                             http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <display-name>Online Course Registration System</display-name>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- Session Configuration: 30 minutes -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+        </cookie-config>
+    </session-config>
+
+    <!-- Security Filter -->
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>com.courseregistration.controller.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/student/*</url-pattern>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Servlets -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/student/login</url-pattern>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>StudentRegisterServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.StudentRegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentRegisterServlet</servlet-name>
+        <url-pattern>/student/register</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>StudentDashboardServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.StudentDashboardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentDashboardServlet</servlet-name>
+        <url-pattern>/student/dashboard</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CourseServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.CourseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CourseServlet</servlet-name>
+        <url-pattern>/courses</url-pattern>
+        <url-pattern>/student/courses</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CourseDetailsServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.CourseDetailsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CourseDetailsServlet</servlet-name>
+        <url-pattern>/course-details</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RegisterCourseServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.RegisterCourseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterCourseServlet</servlet-name>
+        <url-pattern>/student/register-course</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MyCoursesServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.MyCoursesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyCoursesServlet</servlet-name>
+        <url-pattern>/student/my-courses</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RegistrationStatusServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.RegistrationStatusServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegistrationStatusServlet</servlet-name>
+        <url-pattern>/student/registration-status</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CancelRegistrationServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.CancelRegistrationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CancelRegistrationServlet</servlet-name>
+        <url-pattern>/student/cancel-registration</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminLoginServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.AdminLoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminLoginServlet</servlet-name>
+        <url-pattern>/admin/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminDashboardServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.AdminDashboardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminDashboardServlet</servlet-name>
+        <url-pattern>/admin/dashboard</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminCoursesServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.AdminCoursesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminCoursesServlet</servlet-name>
+        <url-pattern>/admin/courses</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddCourseServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.AddCourseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddCourseServlet</servlet-name>
+        <url-pattern>/admin/add-course</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditCourseServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.EditCourseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditCourseServlet</servlet-name>
+        <url-pattern>/admin/edit-course</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteCourseServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.DeleteCourseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteCourseServlet</servlet-name>
+        <url-pattern>/admin/delete-course</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminRegistrationsServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.AdminRegistrationsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminRegistrationsServlet</servlet-name>
+        <url-pattern>/admin/registrations</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateRegistrationServlet</servlet-name>
+        <servlet-class>com.courseregistration.controller.UpdateRegistrationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateRegistrationServlet</servlet-name>
+        <url-pattern>/admin/update-registration</url-pattern>
+    </servlet-mapping>
+
+</web-app>
