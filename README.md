@@ -1,90 +1,97 @@
-# 🎓 Online Course Registration System (OCRS)
+# Online Course Registration System (OCRS)
 
 A complete, full-stack, production-ready Java Web application developed using **Java EE (JSP & Servlets)**, **JDBC**, and **MySQL**, adhering strictly to the **Model-View-Controller (MVC)** architectural design pattern.
 
 ---
 
-## 📌 Table of Contents
+## Table of Contents
 
-1. [Project Overview](#-project-overview)
-2. [Key Features](#-key-features)
-   - [Student Features](#student-features)
-   - [Admin Features](#admin-features)
+1. [Project Overview] (#-project-overview)
+2. [Key Features] (##-key-features)
+   - [Student Features](### student-features)
+   - [Admin Features](### admin-features)
    - [Core Business Rules](#core-business-rules)
 3. [Technology Stack](#-technology-stack)
-4. [Architecture & Design](#-architecture--design)
-5. [Project Directory Structure](#-project-directory-structure)
-6. [Prerequisites & System Requirements](#-prerequisites--system-requirements)
+4. [Architecture & Design] (#-architecture--design)
+5. [Project Directory Structure] (#-project-directory-structure)
+6. [Prerequisites & System Requirements]
+(#-prerequisites--system-requirements)
 7. [Database Setup Guide](#-database-setup-guide)
-8. [Configuration](#-configuration)
-9. [Running the Application](#-running-the-application)
+8. [Configuration] (#-configuration)
+9. [Running the Application] (#-running-the-application)
    - [Option A: Eclipse IDE (Enterprise Java / JEE)](#option-a-eclipse-ide-enterprise-java--jee)
    - [Option B: IntelliJ IDEA Ultimate](#option-b-intellij-idea-ultimate)
    - [Option C: Apache NetBeans](#option-c-apache-netbeans)
    - [Option D: Command Line / Maven CLI](#option-d-command-line--maven-cli)
-10. [Default Login Credentials](#-default-login-credentials)
-11. [End-to-End Test Plan & Verification](#-end-to-end-test-plan--verification)
-12. [Common Errors & Troubleshooting](#-common-errors--troubleshooting)
-13. [GitHub Upload Instructions](#-github-upload-instructions)
-14. [Future Enhancements](#-future-enhancements)
-15. [Viva Voce Questions & Answers](#-viva-voce-questions--answers)
+10. [Default Login Credentials] (#-default-login-credentials)
+11. [End-to-End Test Plan & Verification] (#-end-to-end-test-plan--verification)
+12. [Common Errors & Troubleshooting] (#-common-errors--troubleshooting)
+13. [GitHub Upload Instructions] (#-github-upload-instructions)
+14. [Future Enhancements] (#-future-enhancements)
+15. [Viva Voce Questions & Answers] (#-viva-voce-questions--answers)
 
 ---
 
-## 📖 Project Overview
+## Project Overview
 
 The **Online Course Registration System** is an enterprise-grade academic portal designed to automate student course enrollment, eliminate paper forms, manage class quotas in real-time, and provide university administrators with tools to oversee syllabus offerings, monitor quotas, and approve/reject registrations.
 
 The application follows the **MVC (Model-View-Controller)** pattern:
-* **Model**: Encapsulates data transfer objects (`Student`, `Course`, `Registration`, `Admin`).
-* **View**: JSP pages utilizing HTML5, responsive CSS3, and JavaScript for client validation.
-* **Controller**: Java Servlets handling HTTP requests, enforcing session-based authorization, and invoking the DAO layer.
-* **DAO (Data Access Object)**: JDBC queries using `PreparedStatement` to prevent SQL injection and transaction handling for atomic seat reservations.
+
+- **Model**: Encapsulates data transfer objects (`Student`, `Course`, `Registration`, `Admin`).
+- **View**: JSP pages utilizing HTML5, responsive CSS3, and JavaScript for client validation.
+- **Controller**: Java Servlets handling HTTP requests, enforcing session-based authorization, and invoking the DAO layer.
+- **DAO (Data Access Object)**: JDBC queries using `PreparedStatement` to prevent SQL injection and transaction handling for atomic seat reservations.
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
 ### Student Features
-* **Account Registration**: Secure sign-up with validations (unique Student ID, unique Email, password constraints, department, and academic year).
-* **Authentication & Session Control**: Role-based session management (`/student/*`).
-* **Student Dashboard**: Live summary metrics showing total enrolled courses, pending requests, approved courses, and available catalog count.
-* **Course Catalog (`courses.jsp`)**: 
-  * Full listing of all university courses.
-  * Search by course code, title, or instructor name.
-  * Dropdown filters by academic Department and Semester.
-  * Live seat indicator (`Available / Max Seats`).
-  * Instant feedback badge: `Course Full` or `Registered`.
-* **Course Details (`course-details.jsp`)**: Comprehensive view of course syllabus, instructor, credits, and seat capacity.
-* **One-Click Course Registration**:
-  * Prevents duplicate registrations.
-  * Checks available seat count before booking.
-  * Decrements available seats atomically inside a database transaction.
-  * Sets status to `PENDING`.
-* **My Courses (`my-courses.jsp`)**: List of all enrolled courses with the ability to **cancel** a pending registration (which automatically releases the reserved seat by +1).
-* **Registration Status (`registration-status.jsp`)**: Color-coded badges for workflow stages (`PENDING`, `APPROVED`, `REJECTED`, `CANCELLED`).
-* **Secure Logout**: Clears session and destroys cookies safely.
+
+**Account Registration**: Secure sign-up with validations (unique Student ID, unique Email, password constraints, department, and academic year).
+
+- **Authentication & Session Control**: Role-based session management (`/student/*`).
+- **Student Dashboard**: Live summary metrics showing total enrolled courses, pending requests, approved courses, and available catalog count.
+- **Course Catalog (`courses.jsp`)**:
+  - Full listing of all university courses.
+  - Search by course code, title, or instructor name.
+  - Dropdown filters by academic Department and Semester.
+  - Live seat indicator (`Available / Max Seats`).
+  - Instant feedback badge: `Course Full` or `Registered`.
+- **Course Details (`course-details.jsp`)**: Comprehensive view of course syllabus, instructor, credits, and seat capacity.
+- **One-Click Course Registration**:
+  - Prevents duplicate registrations.
+  - Checks available seat count before booking.
+  - Decrements available seats atomically inside a database transaction.
+  - Sets status to `PENDING`.
+- **My Courses (`my-courses.jsp`)**: List of all enrolled courses with the ability to **cancel** a pending registration (which automatically releases the reserved seat by +1).
+- **Registration Status (`registration-status.jsp`)**: Color-coded badges for workflow stages (`PENDING`, `APPROVED`, `REJECTED`, `CANCELLED`).
+- **Secure Logout**: Clears session and destroys cookies safely.
 
 ### Admin Features
-* **Dedicated Admin Portal**: Separate login portal (`/admin/login`).
-* **Admin Dashboard (`admin-dashboard.jsp`)**: Six core metric counters:
+
+**Dedicated Admin Portal**: Separate login portal (`/admin/login`).
+
+- **Admin Dashboard (`admin-dashboard.jsp`)**: Six core metric counters:
   1. Total Students
   2. Total Courses
   3. Available Courses
   4. Total Registrations
   5. Pending Registrations
   6. Approved Registrations
-* **Course CRUD Management**:
-  * **Add Course**: Form with validation for credits, max capacity, instructor, department, semester.
-  * **Edit Course**: Modify existing course attributes, seat capacity, or active status.
-  * **Delete Course**: Safely removes course with confirmation prompt.
-* **Registration Management (`admin-registrations.jsp`)**:
-  * Review all student submissions.
-  * **Approve** registration (changes status to `APPROVED`).
-  * **Reject** registration (changes status to `REJECTED` and restores +1 seat to the course quota).
-  * Revert/Re-approve controls.
+- **Course CRUD Management**:
+  - **Add Course**: Form with validation for credits, max capacity, instructor, department, semester.
+  - **Edit Course**: Modify existing course attributes, seat capacity, or active status.
+  - **Delete Course**: Safely removes course with confirmation prompt.
+- **Registration Management (`admin-registrations.jsp`)**:
+  - Review all student submissions.
+  - **Approve** registration (changes status to `APPROVED`).
+  - **Reject** registration (changes status to `REJECTED` and restores +1 seat to the course quota).
+  - Revert/Re-approve controls.
 
 ### Core Business Rules
+
 1. **Duplicate Prevention**: A student cannot submit a duplicate registration for a course they are already actively enrolled or pending in.
 2. **Quota Enforcement**: A student cannot register for any course with `available_seats = 0`.
 3. **Atomic Transactions**: Seat decrement and registration creation happen inside a single JDBC transaction (`conn.setAutoCommit(false)`), preventing race conditions.
@@ -107,7 +114,7 @@ The application follows the **MVC (Model-View-Controller)** pattern:
 
 ---
 
-## 🏗 Architecture & Design
+## Architecture & Design
 
 ```text
 [Client Web Browser]
@@ -143,7 +150,7 @@ The application follows the **MVC (Model-View-Controller)** pattern:
 
 ---
 
-## 📁 Project Directory Structure
+## Project Directory Structure
 
 ```text
 OnlineCourseRegistrationSystem/
@@ -225,7 +232,7 @@ OnlineCourseRegistrationSystem/
 
 ---
 
-## 💻 Prerequisites & System Requirements
+## Prerequisites & System Requirements
 
 1. **Java Development Kit (JDK)**: JDK 8, 11, 17, or 21+ installed and configured in `JAVA_HOME`.
 2. **Apache Tomcat**: Version 9.0.x recommended (or Tomcat 8.5).
@@ -238,21 +245,29 @@ OnlineCourseRegistrationSystem/
 ## 🗄 Database Setup Guide
 
 ### 1. Open MySQL Command Line or MySQL Workbench / phpMyAdmin
+
 Log into your MySQL instance:
+
 ```bash
 mysql -u root -p
 ```
-*(Enter your MySQL root password when prompted)*
+
+**(Enter your MySQL root password when prompted)*
 
 ### 2. Execute the Database Script
+
 Run the provided SQL script:
+
 ```sql
 SOURCE C:/path/to/OnlineCourseRegistrationSystem/database/course_registration_db.sql;
 ```
+
 *Or open `database/course_registration_db.sql` in MySQL Workbench or phpMyAdmin and execute all queries.*
 
 ### 3. Verify Database Creation
+
 Verify that all 4 tables and sample records were created:
+
 ```sql
 USE course_registration_db;
 SHOW TABLES;
@@ -263,7 +278,7 @@ SELECT COUNT(*) FROM admins;
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 Open `src/main/java/com/courseregistration/util/DBConnection.java` to inspect or edit your database credentials:
 
@@ -278,9 +293,10 @@ private static final String DEFAULT_PASSWORD = "root"; // <-- Update with your l
 
 ---
 
-## 🚀 Running the Application
+## Running the Application
 
 ### Option A: Eclipse IDE (Enterprise Java / JEE)
+
 1. Open Eclipse and select **File > Import...**.
 2. Select **Existing Maven Projects** (or **Existing Projects into Workspace**).
 3. Browse to the `OnlineCourseRegistrationSystem` directory and click **Finish**.
@@ -296,6 +312,7 @@ private static final String DEFAULT_PASSWORD = "root"; // <-- Update with your l
 ---
 
 ### Option B: IntelliJ IDEA Ultimate
+
 1. Open IntelliJ and select **Open**. Browse to the project folder.
 2. IntelliJ will recognize `pom.xml` and download the dependencies.
 3. Click **Run > Edit Configurations...**.
@@ -308,6 +325,7 @@ private static final String DEFAULT_PASSWORD = "root"; // <-- Update with your l
 ---
 
 ### Option C: Apache NetBeans
+
 1. Open NetBeans > **File > Open Project**.
 2. Select the `OnlineCourseRegistrationSystem` folder (indicated by a Maven icon).
 3. Right-click the project > **Properties > Run**.
@@ -317,16 +335,22 @@ private static final String DEFAULT_PASSWORD = "root"; // <-- Update with your l
 ---
 
 ### Option D: Command Line / Maven CLI
+
 1. Open terminal inside the project directory:
+
    ```bash
    mvn clean package
    ```
+
 2. Maven will compile the Java classes and generate `target/OnlineCourseRegistrationSystem.war`.
 3. Copy `OnlineCourseRegistrationSystem.war` into your Tomcat `webapps/` directory:
+
    ```bash
    cp target/OnlineCourseRegistrationSystem.war /path/to/tomcat/webapps/
    ```
+
 4. Start Tomcat:
+
    ```bash
    # On Windows:
    bin\startup.bat
@@ -334,19 +358,24 @@ private static final String DEFAULT_PASSWORD = "root"; // <-- Update with your l
    # On Linux/macOS:
    bin/startup.sh
    ```
+
 5. Open browser at `http://localhost:8080/OnlineCourseRegistrationSystem/`.
 
 ---
 
-## 🔑 Default Login Credentials
+## Default Login Credentials
 
 ### 🛡️ Administrator Account
-* **URL:** `http://localhost:8080/OnlineCourseRegistrationSystem/admin-login.jsp`
-* **Username:** `admin`
-* **Password:** `admin123`
 
-### 🎓 Sample Student Accounts
-* **URL:** `http://localhost:8080/OnlineCourseRegistrationSystem/login.jsp`
+**URL:** `http://localhost:8080/OnlineCourseRegistrationSystem/admin-login.jsp`
+
+- **Username:** `admin`
+
+- **Password:** `admin123`
+
+### Sample Student Accounts
+
+**URL:** `http://localhost:8080/OnlineCourseRegistrationSystem/login.jsp`
 
 | Student ID | Full Name | Email Address | Password | Department | Year |
 | :--- | :--- | :--- | :--- | :--- | :---: |
@@ -357,7 +386,7 @@ private static final String DEFAULT_PASSWORD = "root"; // <-- Update with your l
 
 ---
 
-## 🧪 End-to-End Test Plan & Verification
+## End-to-End Test Plan & Verification
 
 | Test Case | Steps to Test | Expected Outcome | Result |
 | :--- | :--- | :--- | :---: |
@@ -379,31 +408,41 @@ private static final String DEFAULT_PASSWORD = "root"; // <-- Update with your l
 
 ---
 
-## ⚠️ Common Errors & Troubleshooting
+## Common Errors & Troubleshooting
 
 ### 1. `CommunicationsException: Communications link failure`
-* **Cause**: MySQL server is stopped or not running on port 3306.
-* **Fix**: Start MySQL via Windows Services (`services.msc`), XAMPP Control Panel, or command `net start mysql`.
+
+**Cause**: MySQL server is stopped or not running on port 3306.
+
+- **Fix**: Start MySQL via Windows Services (`services.msc`), XAMPP Control Panel, or command `net start mysql`.
 
 ### 2. `Access denied for user 'root'@'localhost'`
-* **Cause**: Password in `DBConnection.java` does not match your MySQL root password.
-* **Fix**: Update `DEFAULT_PASSWORD` in `DBConnection.java` and recompile.
+
+**Cause**: Password in `DBConnection.java` does not match your MySQL root password.
+
+- **Fix**: Update `DEFAULT_PASSWORD` in `DBConnection.java` and recompile.
 
 ### 3. `ClassNotFoundException: com.mysql.cj.jdbc.Driver`
-* **Cause**: MySQL Connector JAR is missing from Tomcat's runtime classpath.
-* **Fix**: When using Tomcat in Eclipse or manual deployment, copy `mysql-connector-j-8.3.0.jar` into your Tomcat `lib/` directory (`apache-tomcat-9.0.x/lib/`).
+
+**Cause**: MySQL Connector JAR is missing from Tomcat's runtime classpath.
+
+- **Fix**: When using Tomcat in Eclipse or manual deployment, copy `mysql-connector-j-8.3.0.jar` into your Tomcat `lib/` directory (`apache-tomcat-9.0.x/lib/`).
 
 ### 4. `HTTP 404 - Not Found`
-* **Cause**: Mismatched context path or missing WAR deployment.
-* **Fix**: Ensure you access `http://localhost:8080/OnlineCourseRegistrationSystem/` (case-sensitive) or set Application Context to `/` in Tomcat server settings.
+
+**Cause**: Mismatched context path or missing WAR deployment.
+
+- **Fix**: Ensure you access `http://localhost:8080/OnlineCourseRegistrationSystem/` (case-sensitive) or set Application Context to `/` in Tomcat server settings.
 
 ### 5. `Table 'course_registration_db.students' doesn't exist`
-* **Cause**: The SQL script was not imported before running the application.
-* **Fix**: Run `database/course_registration_db.sql` in MySQL Workbench or CLI.
+
+**Cause**: The SQL script was not imported before running the application.
+
+- **Fix**: Run `database/course_registration_db.sql` in MySQL Workbench or CLI.
 
 ---
 
-## 📤 GitHub Upload Instructions
+## GitHub Upload Instructions
 
 Run the following commands in the project directory:
 
@@ -427,23 +466,24 @@ git push -u origin main
 
 ---
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
-* **Email Notifications**: Integration with JavaMail API to send instant confirmation emails upon registration and admin approval.
-* **Prerequisite Enforcement**: System checks whether a student has completed prerequisite courses (e.g., CS101 before CS102) before permitting registration.
-* **Timetable Clash Detection**: Conflict checker to warn students if two selected courses share overlapping lecture slots.
-* **PDF Fee Receipt & Admit Card Generation**: Integration with iText / Apache PDFBox for downloadable registration acknowledgments.
-* **Password Reset Workflow**: Secure token-based password reset via email.
+- **Email Notifications**: Integration with JavaMail API to send instant confirmation emails upon registration and admin approval.
+- **Prerequisite Enforcement**: System checks whether a student has completed prerequisite courses (e.g., CS101 before CS102) before permitting registration.
+- **Timetable Clash Detection**: Conflict checker to warn students if two selected courses share overlapping lecture slots.
+- **PDF Fee Receipt & Admit Card Generation**: Integration with iText / Apache PDFBox for downloadable registration acknowledgments.
+- **Password Reset Workflow**: Secure token-based password reset via email.
 
 ---
 
-## 🎓 Viva Voce Questions & Answers
+## Viva Voce Questions & Answers
 
 **Q1: What is the architectural pattern used in this project?**  
 > **A:** This project uses the **Model-View-Controller (MVC)** architectural pattern. Models represent data entities (`Student`, `Course`, `Registration`), Views are implemented using JSP for presentation, and Controllers are Java Servlets that handle HTTP requests and enforce business logic.
 
 **Q2: How does the system prevent duplicate course registration?**  
 > **A:** Duplicate prevention is implemented at two distinct levels:
+>
 > 1. In `RegistrationDAO.java`, a transactional query checks whether a record already exists with status `PENDING` or `APPROVED`.
 > 2. At the database level, a `UNIQUE KEY uq_student_course (student_id, course_id)` constraint guarantees uniqueness.
 

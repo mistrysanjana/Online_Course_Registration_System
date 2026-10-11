@@ -1,31 +1,5 @@
-# Maven build directory
 target/
-*.war
-
-# Eclipse project files
-.classpath
-.project
-.settings/
-
-# IntelliJ IDEA project files
+*.class
 .idea/
-*.iml
-*.iws
-*.ipr
-out/
-
-# NetBeans
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-.nb-mvn-cache/
-
-# OS-specific files
+.vscode/
 .DS_Store
-Thumbs.db
-desktop.ini
-
-# Logs and runtime databases
-*.log
