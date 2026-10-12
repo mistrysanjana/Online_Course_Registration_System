@@ -476,25 +476,4 @@ git push -u origin main
 
 ---
 
-## Viva Voce Questions & Answers
-
-**Q1: What is the architectural pattern used in this project?**  
-> **A:** This project uses the **Model-View-Controller (MVC)** architectural pattern. Models represent data entities (`Student`, `Course`, `Registration`), Views are implemented using JSP for presentation, and Controllers are Java Servlets that handle HTTP requests and enforce business logic.
-
-**Q2: How does the system prevent duplicate course registration?**  
-> **A:** Duplicate prevention is implemented at two distinct levels:
->
-> 1. In `RegistrationDAO.java`, a transactional query checks whether a record already exists with status `PENDING` or `APPROVED`.
-> 2. At the database level, a `UNIQUE KEY uq_student_course (student_id, course_id)` constraint guarantees uniqueness.
-
-**Q3: How are race conditions avoided during concurrent seat registration?**  
-> **A:** In `RegistrationDAO.java`, registrations are executed within a database transaction using `conn.setAutoCommit(false)`. A `SELECT ... FOR UPDATE` clause locks the target course row, and the seat decrement query contains an atomic guard: `WHERE course_id = ? AND available_seats > 0`. If another thread claims the last seat simultaneously, the transaction rolls back safely.
-
-**Q4: Why use `PreparedStatement` instead of `Statement`?**  
-> **A:** `PreparedStatement` pre-compiles SQL templates and treats parameters strictly as data values rather than executable code, eliminating **SQL Injection** attacks. It also improves execution speed for repeated queries.
-
-**Q5: How is session security handled?**  
-> **A:** The system uses standard `HttpSession` management. The `AuthenticationFilter` intercepts incoming requests for protected URI patterns (`/student/*` and `/admin/*`) and verifies session attributes. If invalid, the user is redirected to the corresponding login page.
-
----
 *Developed for College Academic Evaluation &amp; Software Engineering Lab Project Submission.*
