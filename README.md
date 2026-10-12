@@ -100,7 +100,7 @@ The application follows the **MVC (Model-View-Controller)** pattern:
 
 ---
 
-## 🛠 Technology Stack
+## Technology Stack
 
 | Layer | Technologies Used |
 | :--- | :--- |
@@ -242,7 +242,7 @@ OnlineCourseRegistrationSystem/
 
 ---
 
-## 🗄 Database Setup Guide
+## Database Setup Guide
 
 ### 1. Open MySQL Command Line or MySQL Workbench / phpMyAdmin
 
@@ -365,7 +365,7 @@ private static final String DEFAULT_PASSWORD = "root"; // <-- Update with your l
 
 ## Default Login Credentials
 
-### 🛡️ Administrator Account
+### Administrator Account
 
 **URL:** `http://localhost:8080/OnlineCourseRegistrationSystem/admin-login.jsp`
 
